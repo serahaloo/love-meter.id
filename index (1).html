@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seralove Meter 💜</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #EBD9FF;
+      color: #4B0082;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #B266FF;
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 0.5rem;
+      width: 80%;
+      margin: 0.5rem 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #D8B4F8;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #bb99e8;
+    }
+    .result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #9932CC;
+      min-height: 2.5rem;
+    }
+    .emoji {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      min-height: 2.5rem;
+    }
+    .images {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .images img {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Seralove Meter 💜</h1>
+    <input type="text" id="yourName" placeholder="Namamu..." />
+    <input type="text" id="partnerName" placeholder="Nama dia..." />
+    <button onclick="calculateLove()">Ukur Cintamu!</button>
+    <div class="result" id="result"></div>
+    <div class="emoji" id="emoji"></div>
+    <div class="images" id="images">
+      <!-- Gambar lucu muncul di sini -->
+    </div>
+  </div>
+
+  <script>
+    const cuteImages = [
+      'https://i.imgur.com/9Y3zTRT.png',
+      'https://i.imgur.com/jl3A47I.png',
+      'https://i.imgur.com/2B4wDTe.png',
+      'https://i.imgur.com/xy5Ku6G.png',
+      'https://i.imgur.com/fdP6IZR.png',
+      'https://i.imgur.com/DpU4oEH.png',
+      'https://i.imgur.com/5pZ7Z3P.png',
+      'https://i.imgur.com/6ShFyT0.png'
+    ];
+
+    function calculateLove() {
+      const yourName = document.getElementById('yourName').value.trim();
+      const partnerName = document.getElementById('partnerName').value.trim();
+      const resultDiv = document.getElementById('result');
+      const emojiDiv = document.getElementById('emoji');
+      const imagesDiv = document.getElementById('images');
+
+      if (!yourName || !partnerName) {
+        resultDiv.innerText = 'Isi dulu dong namanya 😅';
+        emojiDiv.innerText = '❌';
+        imagesDiv.innerHTML = '';
+        return;
+      }
+
+      const loveScore = Math.floor(Math.random() * 51) + 50;
+      const messages = [
+        `Cintamu ${loveScore}% kayak boba + es krim 🍨💕`,
+        `Wah! ${loveScore}% cinta yang manis kayak teh tarik 💘`,
+        `Kamu dan ${partnerName} cocok ${loveScore}%, kayak nasi goreng dan kerupuk 🍚💞`,
+        `Hmm... ${loveScore}% cinta ini cukup bikin meleleh kayak cokelat panas 🍫❤️`
+      ];
+      const emojis = ['💘', '💕', '💓', '💝', '😍', '🐱‍🏍', '🌸', '🧸'];
+
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+      resultDiv.innerText = randomMessage;
+      emojiDiv.innerText = randomEmoji;
+
+      imagesDiv.innerHTML = '';
+      const shuffled = cuteImages.sort(() => 0.5 - Math.random());
+      for (let i = 0; i < 3; i++) {
+        const img = document.createElement('img');
+        img.src = shuffled[i];
+        img.alt = 'Cute image';
+        imagesDiv.appendChild(img);
+      }
+    }
+  </script>
+</body>
+</html>
